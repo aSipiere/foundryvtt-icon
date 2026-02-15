@@ -71,11 +71,11 @@
         {#each [["ICON.XPTracking.Ideal", "system.xp_tracker.ideals"], ["ICON.XPTracking.Challenge", "system.xp_tracker.challenges"], ["ICON.XPTracking.Ambition", "system.xp_tracker.ambitions"], ["ICON.XPTracking.Burdens", "system.xp_tracker.burdens"]] as [text, path]}
             <div class="opportunity">
                 <i class="fas fa-chevron-right" />
-                {#if text === "ICON.XPTracking.Ideal" && $actor.system.bond}
+                {#if text === "ICON.XPTracking.Ideal" && typeof $actor.system.bond === "object" && $actor.system.bond}
                     <div>
                         <p>{localize(text)}</p>
                         <ul>
-                            {#each $actor.system.bond.system.ideals as ideal}
+                            {#each $actor.system.bond.system?.ideals ?? [] as ideal}
                                 <li>{@html ideal}</li>
                             {/each}
                         </ul>
