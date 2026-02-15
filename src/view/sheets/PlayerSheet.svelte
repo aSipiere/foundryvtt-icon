@@ -74,7 +74,7 @@
             </span>
             <span>
                 {#if typeof $actor.system.bond === "object" && $actor.system.bond}
-                    {$actor.system.bond.name}
+                    {$actor.system.bond?.name ?? ""}
                     <i
                         class="fas fa-edit"
                         style="float: right; cursor: pointer"
