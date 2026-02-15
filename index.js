@@ -24783,11 +24783,11 @@ function create_fragment$K(ctx) {
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
-      attr(h3, "class", "svelte-icon-pe6rlm");
-      attr(div0, "class", "title svelte-icon-pe6rlm");
+      attr(h3, "class", "svelte-icon-k9lq7e");
+      attr(div0, "class", "title svelte-icon-k9lq7e");
       attr(div1, "class", "flexcol");
       set_attributes(div2, div_data_2);
-      toggle_class(div2, "svelte-icon-pe6rlm", true);
+      toggle_class(div2, "svelte-icon-k9lq7e", true);
     },
     m(target, anchor) {
       insert(target, div2, anchor);
@@ -24995,7 +24995,7 @@ function create_fragment$K(ctx) {
       set_attributes(div2, div_data_2 = get_spread_update(div2_levels, [dirty & /*$$restProps*/
       8 && /*$$restProps*/
       ctx2[3]]));
-      toggle_class(div2, "svelte-icon-pe6rlm", true);
+      toggle_class(div2, "svelte-icon-k9lq7e", true);
     },
     i(local) {
       if (current)
