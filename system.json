@@ -213,8 +213,8 @@
   "readme": "https://github.com/aSipiere/foundryvtt-icon/blob/master/README.md",
   "bugs": "https://github.com/aSipiere/foundryvtt-icon/issues",
   "changelog": "https://github.com/aSipiere/foundryvtt-icon/releases/latest/",
-  "manifest": "https://github.com/aSipiere/foundryvtt-icon/releases/latest/download/system.json",
-  "download": "https://github.com/aSipiere/foundryvtt-icon/releases/latest/download/icon.zip",
+  "manifest": "https://github.com/aSipiere/foundryvtt-icon/releases/download/v0.3.30-rc1/system.json",
+  "download": "https://github.com/aSipiere/foundryvtt-icon/releases/download/v0.3.30-rc1/icon.zip",
   "protected": false,
   "coreTranslation": false,
   "library": false
