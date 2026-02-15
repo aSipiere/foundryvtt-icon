@@ -75,7 +75,7 @@
                     <div>
                         <p>{localize(text)}</p>
                         <ul>
-                            {#each $actor.system.bond.system?.ideals ?? [] as ideal}
+                            {#each $actor.system.bond?.system?.ideals ?? [] as ideal}
                                 <li>{@html ideal}</li>
                             {/each}
                         </ul>
