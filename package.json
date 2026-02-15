@@ -22,7 +22,8 @@
     "eslint": "^8",
     "sass": "^1.63.6",
     "svelte-preprocess": "^5",
-    "vite": "^4.4.0"
+    "vite": "^4.4.0",
+    "vitest": "^4.0.18"
   },
   "browserslist": [
     ">5%",
@@ -32,6 +33,7 @@
     "build": "vite build",
     "dev": "vite",
     "eslint": "eslint .",
-    "fixlint": "eslint . --fix"
+    "fixlint": "eslint . --fix",
+    "test": "vitest run"
   }
 }
