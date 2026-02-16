@@ -32,9 +32,9 @@
     let allJobs = [];
     let selectedClass = "";
 
-    // Derive current selections from actor state
-    $: currentBondId = $actor.system.bond?._id ?? "";
-    $: currentJobId = $actor.system.job?._id ?? "";
+    // Derive current selections from actor state (match by name since embedded _id differs from compendium _id)
+    $: currentBondName = $actor.system.bond?.name ?? "";
+    $: currentJobName = $actor.system.job?.name ?? "";
     $: currentClass = $actor.system.job ? COLOR_TO_CLASS[$actor.system.job.system.class.color] ?? "" : selectedClass;
     $: filteredJobs = currentClass ? allJobs.filter(j => j.system.class.color === CLASS_TO_COLOR[currentClass]) : [];
 
@@ -56,9 +56,9 @@
     });
 
     async function onBondSelected(event) {
-        const bondId = event.target.value;
-        if (!bondId) return;
-        const compendiumBond = allBonds.find(b => b._id === bondId);
+        const bondName = event.target.value;
+        if (!bondName) return;
+        const compendiumBond = allBonds.find(b => b.name === bondName);
         if (!compendiumBond) return;
 
         let [owned] = await $actor.createEmbeddedDocuments("Item", [
@@ -72,9 +72,9 @@
     }
 
     async function onJobSelected(event) {
-        const jobId = event.target.value;
-        if (!jobId) return;
-        const compendiumJob = allJobs.find(j => j._id === jobId);
+        const jobName = event.target.value;
+        if (!jobName) return;
+        const compendiumJob = allJobs.find(j => j.name === jobName);
         if (!compendiumJob) return;
 
         let [owned] = await $actor.createEmbeddedDocuments("Item", [
@@ -133,10 +133,10 @@
                 <strong>{localize("ICON.Bonds.Bond")}:</strong>
             </span>
             <span class="dropdown-cell">
-                <select value={currentBondId} on:change={onBondSelected}>
+                <select value={currentBondName} on:change={onBondSelected}>
                     <option value="">-- Select Bond --</option>
                     {#each allBonds as bond}
-                        <option value={bond._id}>{bond.name}</option>
+                        <option value={bond.name}>{bond.name}</option>
                     {/each}
                 </select>
                 {#if $actor.system.bond}
@@ -162,10 +162,10 @@
                 <strong>{localize("ICON.Job")}:</strong>
             </span>
             <span class="dropdown-cell">
-                <select value={currentJobId} on:change={onJobSelected} disabled={!currentClass}>
+                <select value={currentJobName} on:change={onJobSelected} disabled={!currentClass}>
                     <option value="">-- Select Job --</option>
                     {#each filteredJobs as job}
-                        <option value={job._id}>{job.name}</option>
+                        <option value={job.name}>{job.name}</option>
                     {/each}
                 </select>
                 {#if $actor.system.job}
@@ -229,7 +229,7 @@
         display: grid;
         grid-template:
             "pic    name   player_name tabs" 20px
-            "pic    narr   comb        tabs" 80px / 110px 1fr 1fr 1fr;
+            "pic    narr   comb        tabs" auto / 110px 1fr 1fr 1fr;
         gap: 5px;
         padding: 10px;
 

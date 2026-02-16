@@ -37922,7 +37922,7 @@ function create_each_block_3$1(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*bond*/
-      ctx[32]._id;
+      ctx[32].name;
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -37936,7 +37936,7 @@ function create_each_block_3$1(ctx) {
         set_data(t, t_value);
       if (dirty[0] & /*allBonds*/
       4 && option_value_value !== (option_value_value = /*bond*/
-      ctx2[32]._id)) {
+      ctx2[32].name)) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -38020,7 +38020,7 @@ function create_each_block_1$4(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*job*/
-      ctx[26]._id;
+      ctx[26].name;
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -38034,7 +38034,7 @@ function create_each_block_1$4(ctx) {
         set_data(t, t_value);
       if (dirty[0] & /*filteredJobs*/
       8 && option_value_value !== (option_value_value = /*job*/
-      ctx2[26]._id)) {
+      ctx2[26].name)) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -38096,7 +38096,7 @@ function create_each_block$c(ctx) {
       button = element("button");
       button.textContent = `${/*tab*/
       ctx[23].label}`;
-      attr(button, "class", "tab svelte-icon-1vkcl1c");
+      attr(button, "class", "tab svelte-icon-lbnx69");
       toggle_class(
         button,
         "active",
@@ -38259,7 +38259,7 @@ function create_if_block_1$b(ctx) {
     c() {
       section = element("section");
       if_block.c();
-      attr(section, "class", "sheet-body combat svelte-icon-1vkcl1c");
+      attr(section, "class", "sheet-body combat svelte-icon-lbnx69");
     },
     m(target, anchor) {
       insert(target, section, anchor);
@@ -38617,27 +38617,27 @@ function create_fragment$m(ctx) {
       attr(input3, "type", "text");
       option0.__value = "";
       set_input_value(option0, option0.__value);
-      attr(select0, "class", "svelte-icon-1vkcl1c");
-      attr(span3, "class", "dropdown-cell svelte-icon-1vkcl1c");
+      attr(select0, "class", "svelte-icon-lbnx69");
+      attr(span3, "class", "dropdown-cell svelte-icon-lbnx69");
       set_style(div0, "grid-area", "narr");
-      attr(div0, "class", "header-information svelte-icon-1vkcl1c");
+      attr(div0, "class", "header-information svelte-icon-lbnx69");
       option1.__value = "";
       set_input_value(option1, option1.__value);
-      attr(select1, "class", "svelte-icon-1vkcl1c");
-      attr(span5, "class", "dropdown-cell svelte-icon-1vkcl1c");
+      attr(select1, "class", "svelte-icon-lbnx69");
+      attr(span5, "class", "dropdown-cell svelte-icon-lbnx69");
       option2.__value = "";
       set_input_value(option2, option2.__value);
       select2.disabled = select2_disabled_value = !/*currentClass*/
       ctx[0];
-      attr(select2, "class", "svelte-icon-1vkcl1c");
-      attr(span7, "class", "dropdown-cell svelte-icon-1vkcl1c");
+      attr(select2, "class", "svelte-icon-lbnx69");
+      attr(span7, "class", "dropdown-cell svelte-icon-lbnx69");
       attr(input4, "type", "number");
       set_style(div1, "grid-area", "comb");
-      attr(div1, "class", "header-information svelte-icon-1vkcl1c");
-      attr(div2, "class", "tabs svelte-icon-1vkcl1c");
+      attr(div1, "class", "header-information svelte-icon-lbnx69");
+      attr(div2, "class", "tabs svelte-icon-lbnx69");
       set_style(div2, "grid-area", "tabs");
-      attr(header, "class", "svelte-icon-1vkcl1c");
-      attr(main, "class", "svelte-icon-1vkcl1c");
+      attr(header, "class", "svelte-icon-lbnx69");
+      attr(main, "class", "svelte-icon-lbnx69");
     },
     m(target, anchor) {
       insert(target, main, anchor);
@@ -38672,7 +38672,7 @@ function create_fragment$m(ctx) {
       }
       select_option(
         select0,
-        /*currentBondId*/
+        /*currentBondName*/
         ctx[5]
       );
       append(span3, t15);
@@ -38710,7 +38710,7 @@ function create_fragment$m(ctx) {
       }
       select_option(
         select2,
-        /*currentJobId*/
+        /*currentJobName*/
         ctx[4]
       );
       append(span7, t26);
@@ -38813,11 +38813,11 @@ function create_fragment$m(ctx) {
         }
         each_blocks_3.length = each_value_3.length;
       }
-      if (!current || dirty[0] & /*currentBondId, allBonds*/
+      if (!current || dirty[0] & /*currentBondName, allBonds*/
       36) {
         select_option(
           select0,
-          /*currentBondId*/
+          /*currentBondName*/
           ctx2[5]
         );
       }
@@ -38888,11 +38888,11 @@ function create_fragment$m(ctx) {
         }
         each_blocks_1.length = each_value_1.length;
       }
-      if (!current || dirty[0] & /*currentJobId, filteredJobs*/
+      if (!current || dirty[0] & /*currentJobName, filteredJobs*/
       24) {
         select_option(
           select2,
-          /*currentJobId*/
+          /*currentJobName*/
           ctx2[4]
         );
       }
@@ -38994,8 +38994,8 @@ function allowDrop$2(doc) {
   return ["bond-power", "bond", "job", "ability", "relic"].includes(doc.type);
 }
 function instance$l($$self, $$props, $$invalidate) {
-  let currentBondId;
-  let currentJobId;
+  let currentBondName;
+  let currentJobName;
   let currentClass;
   let filteredJobs;
   let $actor;
@@ -39040,10 +39040,10 @@ function instance$l($$self, $$props, $$invalidate) {
     }
   });
   async function onBondSelected(event) {
-    const bondId = event.target.value;
-    if (!bondId)
+    const bondName = event.target.value;
+    if (!bondName)
       return;
-    const compendiumBond = allBonds.find((b) => b._id === bondId);
+    const compendiumBond = allBonds.find((b) => b.name === bondName);
     if (!compendiumBond)
       return;
     let [owned] = await $actor.createEmbeddedDocuments("Item", [foundry.utils.duplicate(compendiumBond.toObject(true))]);
@@ -39053,10 +39053,10 @@ function instance$l($$self, $$props, $$invalidate) {
     $$invalidate(17, selectedClass = event.target.value);
   }
   async function onJobSelected(event) {
-    const jobId = event.target.value;
-    if (!jobId)
+    const jobName = event.target.value;
+    if (!jobName)
       return;
-    const compendiumJob = allJobs.find((j) => j._id === jobId);
+    const compendiumJob = allJobs.find((j) => j.name === jobName);
     if (!compendiumJob)
       return;
     let [owned] = await $actor.createEmbeddedDocuments("Item", [foundry.utils.duplicate(compendiumJob.toObject(true))]);
@@ -39081,11 +39081,11 @@ function instance$l($$self, $$props, $$invalidate) {
   $$self.$$.update = () => {
     if ($$self.$$.dirty[0] & /*$actor*/
     2) {
-      $$invalidate(5, currentBondId = $actor.system.bond?._id ?? "");
+      $$invalidate(5, currentBondName = $actor.system.bond?.name ?? "");
     }
     if ($$self.$$.dirty[0] & /*$actor*/
     2) {
-      $$invalidate(4, currentJobId = $actor.system.job?._id ?? "");
+      $$invalidate(4, currentJobName = $actor.system.job?.name ?? "");
     }
     if ($$self.$$.dirty[0] & /*$actor*/
     2) {
@@ -39107,8 +39107,8 @@ function instance$l($$self, $$props, $$invalidate) {
     $actor,
     allBonds,
     filteredJobs,
-    currentJobId,
-    currentBondId,
+    currentJobName,
+    currentBondName,
     $selected_tab,
     actor,
     doc,
