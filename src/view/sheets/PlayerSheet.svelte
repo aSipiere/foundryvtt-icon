@@ -1,5 +1,5 @@
 <script>
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
     import { updateDoc } from "../actions/update";
     import { handleSortEmbeddedItem, localize } from "../../util/misc";
     import Portrait from "../components/Portrait.svelte";
@@ -22,6 +22,66 @@
         key: s,
     }));
     let selected_tab = TAB_STORES.get($actor.uuid, "ICON.Narrative");
+
+    // Compendium data for dropdowns
+    const COLOR_TO_CLASS = { Red: "Stalwart", Yellow: "Vagabond", Blue: "Wright", Green: "Mendicant" };
+    const CLASS_TO_COLOR = { Stalwart: "Red", Vagabond: "Yellow", Wright: "Blue", Mendicant: "Green" };
+    const CLASS_NAMES = ["Stalwart", "Vagabond", "Wright", "Mendicant"];
+
+    let allBonds = [];
+    let allJobs = [];
+    let selectedClass = "";
+
+    // Derive current selections from actor state
+    $: currentBondId = $actor.system.bond?._id ?? "";
+    $: currentJobId = $actor.system.job?._id ?? "";
+    $: currentClass = $actor.system.job ? COLOR_TO_CLASS[$actor.system.job.system.class.color] ?? "" : selectedClass;
+    $: filteredJobs = currentClass ? allJobs.filter(j => j.system.class.color === CLASS_TO_COLOR[currentClass]) : [];
+
+    // Keep selectedClass in sync with actor's job
+    $: if ($actor.system.job) {
+        selectedClass = COLOR_TO_CLASS[$actor.system.job.system.class.color] ?? "";
+    }
+
+    onMount(async () => {
+        const bondPack = game.packs.get("icon.bonds");
+        const jobPack = game.packs.get("icon.jobs");
+        if (bondPack) allBonds = (await bondPack.getDocuments()).sort((a, b) => a.name.localeCompare(b.name));
+        if (jobPack) allJobs = (await jobPack.getDocuments()).sort((a, b) => a.name.localeCompare(b.name));
+
+        // Initialize selectedClass from current job
+        if ($actor.system.job) {
+            selectedClass = COLOR_TO_CLASS[$actor.system.job.system.class.color] ?? "";
+        }
+    });
+
+    async function onBondSelected(event) {
+        const bondId = event.target.value;
+        if (!bondId) return;
+        const compendiumBond = allBonds.find(b => b._id === bondId);
+        if (!compendiumBond) return;
+
+        let [owned] = await $actor.createEmbeddedDocuments("Item", [
+            foundry.utils.duplicate(compendiumBond.toObject(true)),
+        ]);
+        await equipBond($actor, owned);
+    }
+
+    async function onClassSelected(event) {
+        selectedClass = event.target.value;
+    }
+
+    async function onJobSelected(event) {
+        const jobId = event.target.value;
+        if (!jobId) return;
+        const compendiumJob = allJobs.find(j => j._id === jobId);
+        if (!compendiumJob) return;
+
+        let [owned] = await $actor.createEmbeddedDocuments("Item", [
+            foundry.utils.duplicate(compendiumJob.toObject(true)),
+        ]);
+        await equipJob($actor, owned);
+    }
 
     /**
      * Add dropped items to this actor
@@ -69,38 +129,51 @@
             <input type="text" use:updateDoc={{ doc, path: "system.kin" }} />
             <span><strong>{localize("ICON.Culture")}:</strong> </span>
             <input type="text" use:updateDoc={{ doc, path: "system.culture" }} />
-            <span data-tooltip={typeof $actor.system.bond === "object" && $actor.system.bond ? null : localize("ICON.Tutorial.AddBond")}>
+            <span>
                 <strong>{localize("ICON.Bonds.Bond")}:</strong>
             </span>
-            <span>
-                {#if typeof $actor.system.bond === "object" && $actor.system.bond}
-                    {$actor.system.bond?.name ?? ""}
+            <span class="dropdown-cell">
+                <select value={currentBondId} on:change={onBondSelected}>
+                    <option value="">-- Select Bond --</option>
+                    {#each allBonds as bond}
+                        <option value={bond._id}>{bond.name}</option>
+                    {/each}
+                </select>
+                {#if $actor.system.bond}
                     <i
                         class="fas fa-edit"
-                        style="float: right; cursor: pointer"
+                        style="cursor: pointer"
                         on:click={() => $actor.system.bond?.sheet?.render(true, { focus: true })}
                     />
-                {:else}
-                    None
                 {/if}
             </span>
         </div>
         <div style="grid-area: comb" class="header-information">
             <span><strong>{localize("ICON.Class")}:</strong></span>
-            <span>{$actor.system.class?.player_class_name ?? "None"}</span>
-            <span data-tooltip={$actor.system.job ? null : localize("ICON.Tutorial.AddJob")}>
+            <span class="dropdown-cell">
+                <select value={currentClass} on:change={onClassSelected}>
+                    <option value="">-- Select Class --</option>
+                    {#each CLASS_NAMES as cls}
+                        <option value={cls}>{cls}</option>
+                    {/each}
+                </select>
+            </span>
+            <span>
                 <strong>{localize("ICON.Job")}:</strong>
             </span>
-            <span draggable="true" use:dragAsDoc={{ doc: $actor.system.job }}>
+            <span class="dropdown-cell">
+                <select value={currentJobId} on:change={onJobSelected} disabled={!currentClass}>
+                    <option value="">-- Select Job --</option>
+                    {#each filteredJobs as job}
+                        <option value={job._id}>{job.name}</option>
+                    {/each}
+                </select>
                 {#if $actor.system.job}
-                    {$actor.system.job.name}
                     <i
                         class="fas fa-edit"
-                        style="float: right; cursor: pointer"
+                        style="cursor: pointer"
                         on:click={() => $actor.system.job.sheet.render(true, { focus: true })}
                     />
-                {:else}
-                    None
                 {/if}
             </span>
             <span>{localize("ICON.Level")}:</span>
@@ -164,6 +237,17 @@
             display: grid;
             grid-template: 1fr 1fr 1fr / 1fr 1fr;
             align-items: center;
+
+            .dropdown-cell {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                select {
+                    flex: 1;
+                    min-width: 0;
+                }
+            }
         }
 
         .tabs {
