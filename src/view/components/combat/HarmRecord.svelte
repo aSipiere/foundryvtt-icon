@@ -1,7 +1,7 @@
 <script>
     import { ICON } from "../../../consts";
     import * as harm from "../../../util/harm";
-    import { TJSContextMenu } from "#standard/application";
+    import { TJSContextMenu } from "#standard/application/menu";
     import { createEventDispatcher } from "svelte";
 
     /** @type {harm.HarmRecord} */

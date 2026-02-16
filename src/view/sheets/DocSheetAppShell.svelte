@@ -2,7 +2,7 @@
 
 <script>
     import { setContext } from "svelte";
-    import { TJSApplicationShell } from "#runtime/svelte/component/core";
+    import { TJSApplicationShell } from "#runtime/svelte/component/application";
     // import DocStringField from "../../components/DocStringField.svelte";
     import { scale } from "svelte/transition";
     import PlayerSheet from "./PlayerSheet.svelte";

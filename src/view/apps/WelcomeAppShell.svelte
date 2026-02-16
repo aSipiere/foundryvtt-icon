@@ -1,7 +1,7 @@
 <svelte:options accessors={true} />
 
 <script>
-    import { ApplicationShell } from "#runtime/svelte/component/core";
+    import { ApplicationShell } from "#runtime/svelte/component/application";
     import { getContext } from "svelte";
     import { ICON } from "../../consts";
 

@@ -1,9 +1,9 @@
 <svelte:options accessors={true} />
 
 <script>
-    import { ApplicationShell } from "#runtime/svelte/component/core";
+    import { ApplicationShell } from "#runtime/svelte/component/application";
     import { TJSDocument } from "#runtime/svelte/store/fvtt/document";
-    import { TJSProseMirror } from "#standard/component";
+    import { TJSProseMirror } from "#standard/component/fvtt/editor";
 
     export let elementRoot;
 

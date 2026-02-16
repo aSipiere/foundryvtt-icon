@@ -81,7 +81,7 @@
     </svelte:element>
 {:else}
     <!-- svelte-ignore missing-declaration -->
-    {#await TextEditor.enrichHTML(node.text, {async: false, rolls: false})}
+    {#await TextEditor.enrichHTML(node.text, {rolls: false})}
         {node.text} 
     {:then enriched} 
         {@html enriched} 
