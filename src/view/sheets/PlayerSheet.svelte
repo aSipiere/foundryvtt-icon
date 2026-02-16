@@ -61,10 +61,18 @@
         const compendiumBond = allBonds.find(b => b.name === bondName);
         if (!compendiumBond) return;
 
-        let [owned] = await $actor.createEmbeddedDocuments("Item", [
-            foundry.utils.duplicate(compendiumBond.toObject(true)),
-        ]);
-        await equipBond($actor, owned);
+        // Unequip all existing bonds
+        let existingBonds = $actor.items.filter(i => i.type === "bond");
+        if (existingBonds.length) {
+            await $actor.updateEmbeddedDocuments("Item",
+                existingBonds.map(b => ({ _id: b.id, "system.equipped": false }))
+            );
+        }
+
+        // Create the new bond - it defaults to equipped: true from schema
+        let itemData = foundry.utils.duplicate(compendiumBond.toObject(true));
+        itemData.system.equipped = true;
+        await $actor.createEmbeddedDocuments("Item", [itemData]);
     }
 
     async function onClassSelected(event) {
@@ -77,10 +85,27 @@
         const compendiumJob = allJobs.find(j => j.name === jobName);
         if (!compendiumJob) return;
 
-        let [owned] = await $actor.createEmbeddedDocuments("Item", [
-            foundry.utils.duplicate(compendiumJob.toObject(true)),
-        ]);
-        await equipJob($actor, owned);
+        // Unequip all existing jobs
+        let existingJobs = $actor.items.filter(i => i.type === "job");
+        if (existingJobs.length) {
+            await $actor.updateEmbeddedDocuments("Item",
+                existingJobs.map(j => ({ _id: j.id, "system.equipped": false }))
+            );
+        }
+
+        // Create the new job with equipped: true, then handle traits
+        let itemData = foundry.utils.duplicate(compendiumJob.toObject(true));
+        itemData.system.equipped = true;
+        let [owned] = await $actor.createEmbeddedDocuments("Item", [itemData]);
+
+        // Handle traits from the job (resolve compendium UUIDs and add them)
+        if (owned.system.traits?.length) {
+            let traitDocs = await Promise.all(owned.system.traits.map(uuid => fromUuid(uuid)));
+            let traitData = traitDocs.filter(t => t).map(t => foundry.utils.duplicate(t.toObject(true)));
+            if (traitData.length) {
+                await $actor.createEmbeddedDocuments("Item", traitData);
+            }
+        }
     }
 
     /**
@@ -116,17 +141,17 @@
 <main use:dropDocs={{ handle: handleDrop, allow: allowDrop }}>
     <!-- Sheet Header -->
     <header>
-        <div class="header-row">
+        <div class="header-row name-row">
             <Portrait />
-            <label><strong>Name:</strong> <input type="text" use:updateDoc={{ doc, path: "name" }} /></label>
-            <label><strong>Player:</strong> <input type="text" use:updateDoc={{ doc, path: "system.player_name" }} placeholder="Player Name" /></label>
+            <div class="field"><strong>Name:</strong> <input type="text" use:updateDoc={{ doc, path: "name" }} /></div>
+            <div class="field"><strong>Player:</strong> <input type="text" use:updateDoc={{ doc, path: "system.player_name" }} placeholder="Player Name" /></div>
         </div>
         <div class="header-row">
-            <label><strong>{localize("ICON.Kintype")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.kin" }} /></label>
-            <label><strong>{localize("ICON.Culture")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.culture" }} /></label>
+            <div class="field"><strong>{localize("ICON.Kintype")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.kin" }} /></div>
+            <div class="field"><strong>{localize("ICON.Culture")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.culture" }} /></div>
         </div>
         <div class="header-row">
-            <label>
+            <div class="field">
                 <strong>{localize("ICON.Bonds.Bond")}:</strong>
                 <select value={currentBondName} on:change={onBondSelected}>
                     <option value="">-- Select --</option>
@@ -134,8 +159,8 @@
                         <option value={bond.name}>{bond.name}</option>
                     {/each}
                 </select>
-            </label>
-            <label>
+            </div>
+            <div class="field">
                 <strong>{localize("ICON.Class")}:</strong>
                 <select value={currentClass} on:change={onClassSelected}>
                     <option value="">-- Select --</option>
@@ -143,8 +168,8 @@
                         <option value={cls}>{cls}</option>
                     {/each}
                 </select>
-            </label>
-            <label>
+            </div>
+            <div class="field">
                 <strong>{localize("ICON.Job")}:</strong>
                 <select value={currentJobName} on:change={onJobSelected} disabled={!currentClass}>
                     <option value="">-- Select --</option>
@@ -152,11 +177,11 @@
                         <option value={job.name}>{job.name}</option>
                     {/each}
                 </select>
-            </label>
-            <label>
+            </div>
+            <div class="field level-field">
                 <strong>{localize("ICON.Level")}:</strong>
                 <input type="number" use:updateDoc={{ doc, path: "system.level" }} />
-            </label>
+            </div>
         </div>
         <div class="tabs">
             {#each tabs as tab}
@@ -206,43 +231,50 @@
         flex-direction: column;
         gap: 4px;
         padding: 8px 10px;
+    }
 
-        .header-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+    .header-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 8px;
+    }
 
-            label {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                flex: 1;
-                min-width: 0;
+    .field {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
 
-                strong {
-                    white-space: nowrap;
-                }
-
-                input, select {
-                    flex: 1;
-                    min-width: 0;
-                }
-
-                input[type="number"] {
-                    max-width: 50px;
-                }
-            }
+        strong {
+            white-space: nowrap;
         }
 
-        .tabs {
-            display: flex;
-            gap: 2px;
+        input, select {
+            flex: 1;
+            min-width: 0;
+        }
+    }
 
-            button {
-                flex: 1;
-                line-height: 1em;
-                padding: 4px 2px;
-            }
+    .level-field {
+        flex: 0 0 auto;
+
+        input {
+            width: 50px;
+        }
+    }
+
+    .tabs {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 2px;
+
+        button {
+            flex: 1;
+            line-height: 1em;
+            padding: 4px 2px;
         }
     }
 

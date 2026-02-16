@@ -38032,7 +38032,7 @@ function create_each_block$c(ctx) {
       button = element("button");
       button.textContent = `${/*tab*/
       ctx[21].label}`;
-      attr(button, "class", "tab svelte-icon-rq1xkl");
+      attr(button, "class", "tab svelte-icon-1dnlv2j");
       toggle_class(
         button,
         "active",
@@ -38195,7 +38195,7 @@ function create_if_block_1$b(ctx) {
     c() {
       section = element("section");
       if_block.c();
-      attr(section, "class", "sheet-body combat svelte-icon-rq1xkl");
+      attr(section, "class", "sheet-body combat svelte-icon-1dnlv2j");
     },
     m(target, anchor) {
       insert(target, section, anchor);
@@ -38334,56 +38334,56 @@ function create_if_block_2$7(ctx) {
 function create_fragment$m(ctx) {
   let main;
   let header;
-  let div0;
+  let div2;
   let portrait;
   let t0;
-  let label0;
+  let div0;
   let strong0;
   let t2;
   let input0;
   let t3;
-  let label1;
+  let div1;
   let strong1;
   let t5;
   let input1;
   let t6;
-  let div1;
-  let label2;
+  let div5;
+  let div3;
   let strong2;
   let t9;
   let input2;
   let t10;
-  let label3;
+  let div4;
   let strong3;
   let t13;
   let input3;
   let t14;
-  let div2;
-  let label4;
+  let div10;
+  let div6;
   let strong4;
   let t17;
   let select0;
   let option0;
   let t19;
-  let label5;
+  let div7;
   let strong5;
   let t22;
   let select1;
   let option1;
   let t24;
-  let label6;
+  let div8;
   let strong6;
   let t27;
   let select2;
   let option2;
   let select2_disabled_value;
   let t29;
-  let label7;
+  let div9;
   let strong7;
   let t32;
   let input4;
   let t33;
-  let div3;
+  let div11;
   let t34;
   let current_block_type_index;
   let if_block;
@@ -38466,36 +38466,36 @@ function create_fragment$m(ctx) {
     c() {
       main = element("main");
       header = element("header");
-      div0 = element("div");
+      div2 = element("div");
       create_component(portrait.$$.fragment);
       t0 = space();
-      label0 = element("label");
+      div0 = element("div");
       strong0 = element("strong");
       strong0.textContent = "Name:";
       t2 = space();
       input0 = element("input");
       t3 = space();
-      label1 = element("label");
+      div1 = element("div");
       strong1 = element("strong");
       strong1.textContent = "Player:";
       t5 = space();
       input1 = element("input");
       t6 = space();
-      div1 = element("div");
-      label2 = element("label");
+      div5 = element("div");
+      div3 = element("div");
       strong2 = element("strong");
       strong2.textContent = `${localize("ICON.Kintype")}:`;
       t9 = space();
       input2 = element("input");
       t10 = space();
-      label3 = element("label");
+      div4 = element("div");
       strong3 = element("strong");
       strong3.textContent = `${localize("ICON.Culture")}:`;
       t13 = space();
       input3 = element("input");
       t14 = space();
-      div2 = element("div");
-      label4 = element("label");
+      div10 = element("div");
+      div6 = element("div");
       strong4 = element("strong");
       strong4.textContent = `${localize("ICON.Bonds.Bond")}:`;
       t17 = space();
@@ -38506,7 +38506,7 @@ function create_fragment$m(ctx) {
         each_blocks_3[i].c();
       }
       t19 = space();
-      label5 = element("label");
+      div7 = element("div");
       strong5 = element("strong");
       strong5.textContent = `${localize("ICON.Class")}:`;
       t22 = space();
@@ -38517,7 +38517,7 @@ function create_fragment$m(ctx) {
         each_blocks_2[i].c();
       }
       t24 = space();
-      label6 = element("label");
+      div8 = element("div");
       strong6 = element("strong");
       strong6.textContent = `${localize("ICON.Job")}:`;
       t27 = space();
@@ -38528,95 +38528,95 @@ function create_fragment$m(ctx) {
         each_blocks_1[i].c();
       }
       t29 = space();
-      label7 = element("label");
+      div9 = element("div");
       strong7 = element("strong");
       strong7.textContent = `${localize("ICON.Level")}:`;
       t32 = space();
       input4 = element("input");
       t33 = space();
-      div3 = element("div");
+      div11 = element("div");
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
       t34 = space();
       if_block.c();
-      attr(strong0, "class", "svelte-icon-rq1xkl");
+      attr(strong0, "class", "svelte-icon-1dnlv2j");
       attr(input0, "type", "text");
-      attr(input0, "class", "svelte-icon-rq1xkl");
-      attr(label0, "class", "svelte-icon-rq1xkl");
-      attr(strong1, "class", "svelte-icon-rq1xkl");
+      attr(input0, "class", "svelte-icon-1dnlv2j");
+      attr(div0, "class", "field svelte-icon-1dnlv2j");
+      attr(strong1, "class", "svelte-icon-1dnlv2j");
       attr(input1, "type", "text");
       attr(input1, "placeholder", "Player Name");
-      attr(input1, "class", "svelte-icon-rq1xkl");
-      attr(label1, "class", "svelte-icon-rq1xkl");
-      attr(div0, "class", "header-row svelte-icon-rq1xkl");
-      attr(strong2, "class", "svelte-icon-rq1xkl");
+      attr(input1, "class", "svelte-icon-1dnlv2j");
+      attr(div1, "class", "field svelte-icon-1dnlv2j");
+      attr(div2, "class", "header-row name-row svelte-icon-1dnlv2j");
+      attr(strong2, "class", "svelte-icon-1dnlv2j");
       attr(input2, "type", "text");
-      attr(input2, "class", "svelte-icon-rq1xkl");
-      attr(label2, "class", "svelte-icon-rq1xkl");
-      attr(strong3, "class", "svelte-icon-rq1xkl");
+      attr(input2, "class", "svelte-icon-1dnlv2j");
+      attr(div3, "class", "field svelte-icon-1dnlv2j");
+      attr(strong3, "class", "svelte-icon-1dnlv2j");
       attr(input3, "type", "text");
-      attr(input3, "class", "svelte-icon-rq1xkl");
-      attr(label3, "class", "svelte-icon-rq1xkl");
-      attr(div1, "class", "header-row svelte-icon-rq1xkl");
-      attr(strong4, "class", "svelte-icon-rq1xkl");
+      attr(input3, "class", "svelte-icon-1dnlv2j");
+      attr(div4, "class", "field svelte-icon-1dnlv2j");
+      attr(div5, "class", "header-row svelte-icon-1dnlv2j");
+      attr(strong4, "class", "svelte-icon-1dnlv2j");
       option0.__value = "";
       set_input_value(option0, option0.__value);
-      attr(select0, "class", "svelte-icon-rq1xkl");
-      attr(label4, "class", "svelte-icon-rq1xkl");
-      attr(strong5, "class", "svelte-icon-rq1xkl");
+      attr(select0, "class", "svelte-icon-1dnlv2j");
+      attr(div6, "class", "field svelte-icon-1dnlv2j");
+      attr(strong5, "class", "svelte-icon-1dnlv2j");
       option1.__value = "";
       set_input_value(option1, option1.__value);
-      attr(select1, "class", "svelte-icon-rq1xkl");
-      attr(label5, "class", "svelte-icon-rq1xkl");
-      attr(strong6, "class", "svelte-icon-rq1xkl");
+      attr(select1, "class", "svelte-icon-1dnlv2j");
+      attr(div7, "class", "field svelte-icon-1dnlv2j");
+      attr(strong6, "class", "svelte-icon-1dnlv2j");
       option2.__value = "";
       set_input_value(option2, option2.__value);
       select2.disabled = select2_disabled_value = !/*currentClass*/
       ctx[0];
-      attr(select2, "class", "svelte-icon-rq1xkl");
-      attr(label6, "class", "svelte-icon-rq1xkl");
-      attr(strong7, "class", "svelte-icon-rq1xkl");
+      attr(select2, "class", "svelte-icon-1dnlv2j");
+      attr(div8, "class", "field svelte-icon-1dnlv2j");
+      attr(strong7, "class", "svelte-icon-1dnlv2j");
       attr(input4, "type", "number");
-      attr(input4, "class", "svelte-icon-rq1xkl");
-      attr(label7, "class", "svelte-icon-rq1xkl");
-      attr(div2, "class", "header-row svelte-icon-rq1xkl");
-      attr(div3, "class", "tabs svelte-icon-rq1xkl");
-      attr(header, "class", "svelte-icon-rq1xkl");
-      attr(main, "class", "svelte-icon-rq1xkl");
+      attr(input4, "class", "svelte-icon-1dnlv2j");
+      attr(div9, "class", "field level-field svelte-icon-1dnlv2j");
+      attr(div10, "class", "header-row svelte-icon-1dnlv2j");
+      attr(div11, "class", "tabs svelte-icon-1dnlv2j");
+      attr(header, "class", "svelte-icon-1dnlv2j");
+      attr(main, "class", "svelte-icon-1dnlv2j");
     },
     m(target, anchor) {
       insert(target, main, anchor);
       append(main, header);
-      append(header, div0);
-      mount_component(portrait, div0, null);
-      append(div0, t0);
-      append(div0, label0);
-      append(label0, strong0);
-      append(label0, t2);
-      append(label0, input0);
-      append(div0, t3);
-      append(div0, label1);
-      append(label1, strong1);
-      append(label1, t5);
-      append(label1, input1);
-      append(header, t6);
-      append(header, div1);
-      append(div1, label2);
-      append(label2, strong2);
-      append(label2, t9);
-      append(label2, input2);
-      append(div1, t10);
-      append(div1, label3);
-      append(label3, strong3);
-      append(label3, t13);
-      append(label3, input3);
-      append(header, t14);
       append(header, div2);
-      append(div2, label4);
-      append(label4, strong4);
-      append(label4, t17);
-      append(label4, select0);
+      mount_component(portrait, div2, null);
+      append(div2, t0);
+      append(div2, div0);
+      append(div0, strong0);
+      append(div0, t2);
+      append(div0, input0);
+      append(div2, t3);
+      append(div2, div1);
+      append(div1, strong1);
+      append(div1, t5);
+      append(div1, input1);
+      append(header, t6);
+      append(header, div5);
+      append(div5, div3);
+      append(div3, strong2);
+      append(div3, t9);
+      append(div3, input2);
+      append(div5, t10);
+      append(div5, div4);
+      append(div4, strong3);
+      append(div4, t13);
+      append(div4, input3);
+      append(header, t14);
+      append(header, div10);
+      append(div10, div6);
+      append(div6, strong4);
+      append(div6, t17);
+      append(div6, select0);
       append(select0, option0);
       for (let i = 0; i < each_blocks_3.length; i += 1) {
         if (each_blocks_3[i]) {
@@ -38628,11 +38628,11 @@ function create_fragment$m(ctx) {
         /*currentBondName*/
         ctx[5]
       );
-      append(div2, t19);
-      append(div2, label5);
-      append(label5, strong5);
-      append(label5, t22);
-      append(label5, select1);
+      append(div10, t19);
+      append(div10, div7);
+      append(div7, strong5);
+      append(div7, t22);
+      append(div7, select1);
       append(select1, option1);
       for (let i = 0; i < each_blocks_2.length; i += 1) {
         if (each_blocks_2[i]) {
@@ -38644,11 +38644,11 @@ function create_fragment$m(ctx) {
         /*currentClass*/
         ctx[0]
       );
-      append(div2, t24);
-      append(div2, label6);
-      append(label6, strong6);
-      append(label6, t27);
-      append(label6, select2);
+      append(div10, t24);
+      append(div10, div8);
+      append(div8, strong6);
+      append(div8, t27);
+      append(div8, select2);
       append(select2, option2);
       for (let i = 0; i < each_blocks_1.length; i += 1) {
         if (each_blocks_1[i]) {
@@ -38660,16 +38660,16 @@ function create_fragment$m(ctx) {
         /*currentJobName*/
         ctx[4]
       );
-      append(div2, t29);
-      append(div2, label7);
-      append(label7, strong7);
-      append(label7, t32);
-      append(label7, input4);
+      append(div10, t29);
+      append(div10, div9);
+      append(div9, strong7);
+      append(div9, t32);
+      append(div9, input4);
       append(header, t33);
-      append(header, div3);
+      append(header, div11);
       for (let i = 0; i < each_blocks.length; i += 1) {
         if (each_blocks[i]) {
-          each_blocks[i].m(div3, null);
+          each_blocks[i].m(div11, null);
         }
       }
       append(main, t34);
@@ -38845,7 +38845,7 @@ function create_fragment$m(ctx) {
           } else {
             each_blocks[i] = create_each_block$c(child_ctx);
             each_blocks[i].c();
-            each_blocks[i].m(div3, null);
+            each_blocks[i].m(div11, null);
           }
         }
         for (; i < each_blocks.length; i += 1) {
@@ -38957,8 +38957,13 @@ function instance$l($$self, $$props, $$invalidate) {
     const compendiumBond = allBonds.find((b) => b.name === bondName);
     if (!compendiumBond)
       return;
-    let [owned] = await $actor.createEmbeddedDocuments("Item", [foundry.utils.duplicate(compendiumBond.toObject(true))]);
-    await equipBond($actor, owned);
+    let existingBonds = $actor.items.filter((i) => i.type === "bond");
+    if (existingBonds.length) {
+      await $actor.updateEmbeddedDocuments("Item", existingBonds.map((b) => ({ _id: b.id, "system.equipped": false })));
+    }
+    let itemData = foundry.utils.duplicate(compendiumBond.toObject(true));
+    itemData.system.equipped = true;
+    await $actor.createEmbeddedDocuments("Item", [itemData]);
   }
   async function onClassSelected(event) {
     $$invalidate(17, selectedClass = event.target.value);
@@ -38970,8 +38975,20 @@ function instance$l($$self, $$props, $$invalidate) {
     const compendiumJob = allJobs.find((j) => j.name === jobName);
     if (!compendiumJob)
       return;
-    let [owned] = await $actor.createEmbeddedDocuments("Item", [foundry.utils.duplicate(compendiumJob.toObject(true))]);
-    await equipJob($actor, owned);
+    let existingJobs = $actor.items.filter((i) => i.type === "job");
+    if (existingJobs.length) {
+      await $actor.updateEmbeddedDocuments("Item", existingJobs.map((j) => ({ _id: j.id, "system.equipped": false })));
+    }
+    let itemData = foundry.utils.duplicate(compendiumJob.toObject(true));
+    itemData.system.equipped = true;
+    let [owned] = await $actor.createEmbeddedDocuments("Item", [itemData]);
+    if (owned.system.traits?.length) {
+      let traitDocs = await Promise.all(owned.system.traits.map((uuid) => fromUuid(uuid)));
+      let traitData = traitDocs.filter((t) => t).map((t) => foundry.utils.duplicate(t.toObject(true)));
+      if (traitData.length) {
+        await $actor.createEmbeddedDocuments("Item", traitData);
+      }
+    }
   }
   async function handleDrop(doc2, event) {
     if (doc2 instanceof Item) {
