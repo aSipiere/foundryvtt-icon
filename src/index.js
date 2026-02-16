@@ -54,6 +54,15 @@ Hooks.once("init", () => {
 Hooks.once("ready", async () => {
     console.log(`Foundry ready, doing final checks.`);
 
+    // Warn about missing recommended modules
+    const recommended = ["statuscounter", "icon-status-icons", "socketlib", "lancer-initiative"];
+    const missing = recommended.filter(id => !game.modules.get(id)?.active);
+    if (missing.length) {
+        ui.notifications.warn(
+            `ICON: Recommended modules not active: ${missing.join(", ")}. Some features may not work correctly.`
+        );
+    }
+
     // Register sheet application classes
     setupTransformers();
     setupSheets();
