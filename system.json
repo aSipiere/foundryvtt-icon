@@ -65,38 +65,26 @@
   ],
   "relationships": {
     "systems": [],
-    "requires": [
+    "recommends": [
       {
         "id": "statuscounter",
         "type": "module",
-        "manifest": "https://gitlab.com/woodentavern/status-icon-counters/-/raw/master/src/module.json",
-        "compatibility": {
-          "verified": "2.1.0"
-        }
+        "manifest": "https://gitlab.com/woodentavern/status-icon-counters/-/raw/master/src/module.json"
       },
       {
         "id": "icon-status-icons",
         "type": "module",
-        "manifest": "https://raw.githubusercontent.com/Eranziel/icon-status-icons/main/module.json",
-        "compatibility": {
-          "verified": "1.1.0"
-        }
+        "manifest": "https://raw.githubusercontent.com/Eranziel/icon-status-icons/main/module.json"
       },
       {
         "id": "socketlib",
         "type": "module",
-        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json",
-        "compatibility": {
-          "verified": "1.0.13"
-        }
+        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json"
       },
       {
         "id": "lancer-initiative",
         "type": "module",
-        "manifest": "https://raw.githubusercontent.com/BoltsJ/lancer-initiative/default/public/module.json",
-        "compatibility": {
-          "verified": "26-dev"
-        }
+        "manifest": "https://raw.githubusercontent.com/BoltsJ/lancer-initiative/default/public/module.json"
       }
     ]
   },
