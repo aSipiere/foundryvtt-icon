@@ -11,7 +11,7 @@ export async function equipJob(actor, job) {
     for (let other_job of jobs) {
         updates.push({
             _id: other_job._id,
-            "system.equipped": other_job === job
+            "system.equipped": other_job._id === job._id
         });
     }
 
@@ -53,7 +53,7 @@ export async function equipBond(actor, bond) {
     for (let other_bond of bonds) {
         updates.push({
             _id: other_bond._id,
-            "system.equipped": other_bond === bond
+            "system.equipped": other_bond._id === bond._id
         });
     }
 
