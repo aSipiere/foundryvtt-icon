@@ -24191,7 +24191,7 @@ function create_if_block_9(ctx) {
 function create_if_block_8(ctx) {
   return { c: noop, m: noop, p: noop, d: noop };
 }
-function create_if_block_7$2(ctx) {
+function create_if_block_7$1(ctx) {
   let t0;
   let t1_value = (
     /*choice*/
@@ -24221,7 +24221,7 @@ function create_if_block_7$2(ctx) {
     }
   };
 }
-function create_if_block_6$2(ctx) {
+function create_if_block_6$1(ctx) {
   let t0;
   let t1_value = (
     /*choice*/
@@ -24640,7 +24640,7 @@ function create_fragment$K(ctx) {
       /*choice*/
       ctx2[0].interrupt > 0
     )
-      return create_if_block_7$2;
+      return create_if_block_7$1;
     if (
       /*choice*/
       ctx2[0].actions === -1
@@ -24666,7 +24666,7 @@ function create_fragment$K(ctx) {
   let if_block0 = current_block_type && current_block_type(ctx);
   let if_block1 = (
     /*choice*/
-    ctx[0].resolve && create_if_block_6$2(ctx)
+    ctx[0].resolve && create_if_block_6$1(ctx)
   );
   function select_block_type_1(ctx2, dirty) {
     if (
@@ -24869,7 +24869,7 @@ function create_fragment$K(ctx) {
         if (if_block1) {
           if_block1.p(ctx2, dirty);
         } else {
-          if_block1 = create_if_block_6$2(ctx2);
+          if_block1 = create_if_block_6$1(ctx2);
           if_block1.c();
           if_block1.m(span0, t3);
         }
@@ -36816,8 +36816,8 @@ async function equipJob(actor, job) {
   let jobs = actor.items.filter((i) => i.type === "job");
   for (let other_job of jobs) {
     updates.push({
-      _id: other_job._id,
-      "system.equipped": other_job._id === job._id
+      _id: other_job.id,
+      "system.equipped": other_job.id === job.id
     });
   }
   let traits = actor.items.filter((i) => i.type === "ability" && i.system.trait);
@@ -36826,7 +36826,7 @@ async function equipJob(actor, job) {
     let should_be_equipped = missing_traits.some((mt) => mt.name === trait.name);
     missing_traits = missing_traits.filter((mt) => mt.name != trait.name);
     updates.push({
-      _id: trait._id,
+      _id: trait.id,
       "system.equipped": should_be_equipped
     });
   }
@@ -36842,8 +36842,8 @@ async function equipBond(actor, bond) {
   let bonds = actor.items.filter((i) => i.type === "bond");
   for (let other_bond of bonds) {
     updates.push({
-      _id: other_bond._id,
-      "system.equipped": other_bond._id === bond._id
+      _id: other_bond.id,
+      "system.equipped": other_bond.id === bond.id
     });
   }
   await actor.updateEmbeddedDocuments("Item", updates);
@@ -37891,29 +37891,29 @@ class Loadout extends SvelteComponent {
 const PlayerSheet_svelte_svelte_type_style_lang = "";
 function get_each_context$c(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[23] = list[i];
+  child_ctx[21] = list[i];
   return child_ctx;
 }
 function get_each_context_1$4(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[26] = list[i];
+  child_ctx[24] = list[i];
   return child_ctx;
 }
 function get_each_context_2$4(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[29] = list[i];
+  child_ctx[27] = list[i];
   return child_ctx;
 }
 function get_each_context_3$1(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[32] = list[i];
+  child_ctx[30] = list[i];
   return child_ctx;
 }
 function create_each_block_3$1(ctx) {
   let option;
   let t_value = (
     /*bond*/
-    ctx[32].name + ""
+    ctx[30].name + ""
   );
   let t;
   let option_value_value;
@@ -37922,7 +37922,7 @@ function create_each_block_3$1(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*bond*/
-      ctx[32].name;
+      ctx[30].name;
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -37932,11 +37932,11 @@ function create_each_block_3$1(ctx) {
     p(ctx2, dirty) {
       if (dirty[0] & /*allBonds*/
       4 && t_value !== (t_value = /*bond*/
-      ctx2[32].name + ""))
+      ctx2[30].name + ""))
         set_data(t, t_value);
       if (dirty[0] & /*allBonds*/
       4 && option_value_value !== (option_value_value = /*bond*/
-      ctx2[32].name)) {
+      ctx2[30].name)) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -37948,43 +37948,11 @@ function create_each_block_3$1(ctx) {
     }
   };
 }
-function create_if_block_7$1(ctx) {
-  let i;
-  let mounted;
-  let dispose;
-  return {
-    c() {
-      i = element("i");
-      attr(i, "class", "fas fa-edit");
-      set_style(i, "cursor", "pointer");
-    },
-    m(target, anchor) {
-      insert(target, i, anchor);
-      if (!mounted) {
-        dispose = listen(
-          i,
-          "click",
-          /*click_handler*/
-          ctx[18]
-        );
-        mounted = true;
-      }
-    },
-    p: noop,
-    d(detaching) {
-      if (detaching) {
-        detach(i);
-      }
-      mounted = false;
-      dispose();
-    }
-  };
-}
 function create_each_block_2$4(ctx) {
   let option;
   let t_value = (
     /*cls*/
-    ctx[29] + ""
+    ctx[27] + ""
   );
   let t;
   return {
@@ -37992,7 +37960,7 @@ function create_each_block_2$4(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = /*cls*/
-      ctx[29];
+      ctx[27];
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -38011,7 +37979,7 @@ function create_each_block_1$4(ctx) {
   let option;
   let t_value = (
     /*job*/
-    ctx[26].name + ""
+    ctx[24].name + ""
   );
   let t;
   let option_value_value;
@@ -38020,7 +37988,7 @@ function create_each_block_1$4(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*job*/
-      ctx[26].name;
+      ctx[24].name;
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -38030,11 +37998,11 @@ function create_each_block_1$4(ctx) {
     p(ctx2, dirty) {
       if (dirty[0] & /*filteredJobs*/
       8 && t_value !== (t_value = /*job*/
-      ctx2[26].name + ""))
+      ctx2[24].name + ""))
         set_data(t, t_value);
       if (dirty[0] & /*filteredJobs*/
       8 && option_value_value !== (option_value_value = /*job*/
-      ctx2[26].name)) {
+      ctx2[24].name)) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -38046,48 +38014,16 @@ function create_each_block_1$4(ctx) {
     }
   };
 }
-function create_if_block_6$1(ctx) {
-  let i;
-  let mounted;
-  let dispose;
-  return {
-    c() {
-      i = element("i");
-      attr(i, "class", "fas fa-edit");
-      set_style(i, "cursor", "pointer");
-    },
-    m(target, anchor) {
-      insert(target, i, anchor);
-      if (!mounted) {
-        dispose = listen(
-          i,
-          "click",
-          /*click_handler_1*/
-          ctx[19]
-        );
-        mounted = true;
-      }
-    },
-    p: noop,
-    d(detaching) {
-      if (detaching) {
-        detach(i);
-      }
-      mounted = false;
-      dispose();
-    }
-  };
-}
 function create_each_block$c(ctx) {
   let button;
   let mounted;
   let dispose;
-  function click_handler_2() {
+  function click_handler() {
     return (
-      /*click_handler_2*/
-      ctx[20](
+      /*click_handler*/
+      ctx[18](
         /*tab*/
-        ctx[23]
+        ctx[21]
       )
     );
   }
@@ -38095,20 +38031,20 @@ function create_each_block$c(ctx) {
     c() {
       button = element("button");
       button.textContent = `${/*tab*/
-      ctx[23].label}`;
-      attr(button, "class", "tab svelte-icon-lbnx69");
+      ctx[21].label}`;
+      attr(button, "class", "tab svelte-icon-rq1xkl");
       toggle_class(
         button,
         "active",
         /*tab*/
-        ctx[23].key === /*$selected_tab*/
+        ctx[21].key === /*$selected_tab*/
         ctx[6]
       );
     },
     m(target, anchor) {
       insert(target, button, anchor);
       if (!mounted) {
-        dispose = listen(button, "click", click_handler_2);
+        dispose = listen(button, "click", click_handler);
         mounted = true;
       }
     },
@@ -38120,7 +38056,7 @@ function create_each_block$c(ctx) {
           button,
           "active",
           /*tab*/
-          ctx[23].key === /*$selected_tab*/
+          ctx[21].key === /*$selected_tab*/
           ctx[6]
         );
       }
@@ -38259,7 +38195,7 @@ function create_if_block_1$b(ctx) {
     c() {
       section = element("section");
       if_block.c();
-      attr(section, "class", "sheet-body combat svelte-icon-lbnx69");
+      attr(section, "class", "sheet-body combat svelte-icon-rq1xkl");
     },
     m(target, anchor) {
       insert(target, section, anchor);
@@ -38398,60 +38334,63 @@ function create_if_block_2$7(ctx) {
 function create_fragment$m(ctx) {
   let main;
   let header;
+  let div0;
   let portrait;
   let t0;
-  let input0;
-  let t1;
-  let input1;
-  let t2;
-  let div0;
-  let span0;
+  let label0;
   let strong0;
-  let t5;
-  let input2;
-  let t6;
-  let span1;
+  let t2;
+  let input0;
+  let t3;
+  let label1;
   let strong1;
-  let t9;
-  let input3;
-  let t10;
-  let span2;
+  let t5;
+  let input1;
+  let t6;
+  let div1;
+  let label2;
   let strong2;
+  let t9;
+  let input2;
+  let t10;
+  let label3;
+  let strong3;
   let t13;
-  let span3;
+  let input3;
+  let t14;
+  let div2;
+  let label4;
+  let strong4;
+  let t17;
   let select0;
   let option0;
-  let t15;
-  let t16;
-  let div1;
-  let span4;
-  let strong3;
   let t19;
-  let span5;
+  let label5;
+  let strong5;
+  let t22;
   let select1;
   let option1;
-  let t21;
-  let span6;
-  let strong4;
   let t24;
-  let span7;
+  let label6;
+  let strong6;
+  let t27;
   let select2;
   let option2;
   let select2_disabled_value;
-  let t26;
-  let t27;
-  let span8;
-  let t30;
-  let input4;
-  let t31;
-  let div2;
+  let t29;
+  let label7;
+  let strong7;
   let t32;
+  let input4;
+  let t33;
+  let div3;
+  let t34;
   let current_block_type_index;
-  let if_block2;
+  let if_block;
   let current;
   let mounted;
   let dispose;
-  portrait = new Portrait({ props: { style: "grid-area: pic" } });
+  portrait = new Portrait({});
   let each_value_3 = ensure_array_like(
     /*allBonds*/
     ctx[2]
@@ -38460,10 +38399,6 @@ function create_fragment$m(ctx) {
   for (let i = 0; i < each_value_3.length; i += 1) {
     each_blocks_3[i] = create_each_block_3$1(get_each_context_3$1(ctx, each_value_3, i));
   }
-  let if_block0 = (
-    /*$actor*/
-    ctx[1].system.bond && create_if_block_7$1(ctx)
-  );
   let each_value_2 = ensure_array_like(
     /*CLASS_NAMES*/
     ctx[11]
@@ -38480,10 +38415,6 @@ function create_fragment$m(ctx) {
   for (let i = 0; i < each_value_1.length; i += 1) {
     each_blocks_1[i] = create_each_block_1$4(get_each_context_1$4(ctx, each_value_1, i));
   }
-  let if_block1 = (
-    /*$actor*/
-    ctx[1].system.job && create_if_block_6$1(ctx)
-  );
   let each_value = ensure_array_like(
     /*tabs*/
     ctx[9]
@@ -38530,140 +38461,162 @@ function create_fragment$m(ctx) {
     return 5;
   }
   current_block_type_index = select_block_type(ctx);
-  if_block2 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+  if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
   return {
     c() {
       main = element("main");
       header = element("header");
+      div0 = element("div");
       create_component(portrait.$$.fragment);
       t0 = space();
-      input0 = element("input");
-      t1 = space();
-      input1 = element("input");
-      t2 = space();
-      div0 = element("div");
-      span0 = element("span");
+      label0 = element("label");
       strong0 = element("strong");
-      strong0.textContent = `${localize("ICON.Kintype")}:`;
-      t5 = space();
-      input2 = element("input");
-      t6 = space();
-      span1 = element("span");
+      strong0.textContent = "Name:";
+      t2 = space();
+      input0 = element("input");
+      t3 = space();
+      label1 = element("label");
       strong1 = element("strong");
-      strong1.textContent = `${localize("ICON.Culture")}:`;
-      t9 = space();
-      input3 = element("input");
-      t10 = space();
-      span2 = element("span");
+      strong1.textContent = "Player:";
+      t5 = space();
+      input1 = element("input");
+      t6 = space();
+      div1 = element("div");
+      label2 = element("label");
       strong2 = element("strong");
-      strong2.textContent = `${localize("ICON.Bonds.Bond")}:`;
+      strong2.textContent = `${localize("ICON.Kintype")}:`;
+      t9 = space();
+      input2 = element("input");
+      t10 = space();
+      label3 = element("label");
+      strong3 = element("strong");
+      strong3.textContent = `${localize("ICON.Culture")}:`;
       t13 = space();
-      span3 = element("span");
+      input3 = element("input");
+      t14 = space();
+      div2 = element("div");
+      label4 = element("label");
+      strong4 = element("strong");
+      strong4.textContent = `${localize("ICON.Bonds.Bond")}:`;
+      t17 = space();
       select0 = element("select");
       option0 = element("option");
-      option0.textContent = "-- Select Bond --";
+      option0.textContent = "-- Select --";
       for (let i = 0; i < each_blocks_3.length; i += 1) {
         each_blocks_3[i].c();
       }
-      t15 = space();
-      if (if_block0)
-        if_block0.c();
-      t16 = space();
-      div1 = element("div");
-      span4 = element("span");
-      strong3 = element("strong");
-      strong3.textContent = `${localize("ICON.Class")}:`;
       t19 = space();
-      span5 = element("span");
+      label5 = element("label");
+      strong5 = element("strong");
+      strong5.textContent = `${localize("ICON.Class")}:`;
+      t22 = space();
       select1 = element("select");
       option1 = element("option");
-      option1.textContent = "-- Select Class --";
+      option1.textContent = "-- Select --";
       for (let i = 0; i < each_blocks_2.length; i += 1) {
         each_blocks_2[i].c();
       }
-      t21 = space();
-      span6 = element("span");
-      strong4 = element("strong");
-      strong4.textContent = `${localize("ICON.Job")}:`;
       t24 = space();
-      span7 = element("span");
+      label6 = element("label");
+      strong6 = element("strong");
+      strong6.textContent = `${localize("ICON.Job")}:`;
+      t27 = space();
       select2 = element("select");
       option2 = element("option");
-      option2.textContent = "-- Select Job --";
+      option2.textContent = "-- Select --";
       for (let i = 0; i < each_blocks_1.length; i += 1) {
         each_blocks_1[i].c();
       }
-      t26 = space();
-      if (if_block1)
-        if_block1.c();
-      t27 = space();
-      span8 = element("span");
-      span8.textContent = `${localize("ICON.Level")}:`;
-      t30 = space();
+      t29 = space();
+      label7 = element("label");
+      strong7 = element("strong");
+      strong7.textContent = `${localize("ICON.Level")}:`;
+      t32 = space();
       input4 = element("input");
-      t31 = space();
-      div2 = element("div");
+      t33 = space();
+      div3 = element("div");
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
-      t32 = space();
-      if_block2.c();
-      set_style(input0, "grid-area", "name");
+      t34 = space();
+      if_block.c();
+      attr(strong0, "class", "svelte-icon-rq1xkl");
       attr(input0, "type", "text");
-      set_style(input1, "grid-area", "player_name");
+      attr(input0, "class", "svelte-icon-rq1xkl");
+      attr(label0, "class", "svelte-icon-rq1xkl");
+      attr(strong1, "class", "svelte-icon-rq1xkl");
       attr(input1, "type", "text");
       attr(input1, "placeholder", "Player Name");
+      attr(input1, "class", "svelte-icon-rq1xkl");
+      attr(label1, "class", "svelte-icon-rq1xkl");
+      attr(div0, "class", "header-row svelte-icon-rq1xkl");
+      attr(strong2, "class", "svelte-icon-rq1xkl");
       attr(input2, "type", "text");
+      attr(input2, "class", "svelte-icon-rq1xkl");
+      attr(label2, "class", "svelte-icon-rq1xkl");
+      attr(strong3, "class", "svelte-icon-rq1xkl");
       attr(input3, "type", "text");
+      attr(input3, "class", "svelte-icon-rq1xkl");
+      attr(label3, "class", "svelte-icon-rq1xkl");
+      attr(div1, "class", "header-row svelte-icon-rq1xkl");
+      attr(strong4, "class", "svelte-icon-rq1xkl");
       option0.__value = "";
       set_input_value(option0, option0.__value);
-      attr(select0, "class", "svelte-icon-lbnx69");
-      attr(span3, "class", "dropdown-cell svelte-icon-lbnx69");
-      set_style(div0, "grid-area", "narr");
-      attr(div0, "class", "header-information svelte-icon-lbnx69");
+      attr(select0, "class", "svelte-icon-rq1xkl");
+      attr(label4, "class", "svelte-icon-rq1xkl");
+      attr(strong5, "class", "svelte-icon-rq1xkl");
       option1.__value = "";
       set_input_value(option1, option1.__value);
-      attr(select1, "class", "svelte-icon-lbnx69");
-      attr(span5, "class", "dropdown-cell svelte-icon-lbnx69");
+      attr(select1, "class", "svelte-icon-rq1xkl");
+      attr(label5, "class", "svelte-icon-rq1xkl");
+      attr(strong6, "class", "svelte-icon-rq1xkl");
       option2.__value = "";
       set_input_value(option2, option2.__value);
       select2.disabled = select2_disabled_value = !/*currentClass*/
       ctx[0];
-      attr(select2, "class", "svelte-icon-lbnx69");
-      attr(span7, "class", "dropdown-cell svelte-icon-lbnx69");
+      attr(select2, "class", "svelte-icon-rq1xkl");
+      attr(label6, "class", "svelte-icon-rq1xkl");
+      attr(strong7, "class", "svelte-icon-rq1xkl");
       attr(input4, "type", "number");
-      set_style(div1, "grid-area", "comb");
-      attr(div1, "class", "header-information svelte-icon-lbnx69");
-      attr(div2, "class", "tabs svelte-icon-lbnx69");
-      set_style(div2, "grid-area", "tabs");
-      attr(header, "class", "svelte-icon-lbnx69");
-      attr(main, "class", "svelte-icon-lbnx69");
+      attr(input4, "class", "svelte-icon-rq1xkl");
+      attr(label7, "class", "svelte-icon-rq1xkl");
+      attr(div2, "class", "header-row svelte-icon-rq1xkl");
+      attr(div3, "class", "tabs svelte-icon-rq1xkl");
+      attr(header, "class", "svelte-icon-rq1xkl");
+      attr(main, "class", "svelte-icon-rq1xkl");
     },
     m(target, anchor) {
       insert(target, main, anchor);
       append(main, header);
-      mount_component(portrait, header, null);
-      append(header, t0);
-      append(header, input0);
-      append(header, t1);
-      append(header, input1);
-      append(header, t2);
       append(header, div0);
-      append(div0, span0);
-      append(span0, strong0);
-      append(div0, t5);
-      append(div0, input2);
-      append(div0, t6);
-      append(div0, span1);
-      append(span1, strong1);
-      append(div0, t9);
-      append(div0, input3);
-      append(div0, t10);
-      append(div0, span2);
-      append(span2, strong2);
-      append(div0, t13);
-      append(div0, span3);
-      append(span3, select0);
+      mount_component(portrait, div0, null);
+      append(div0, t0);
+      append(div0, label0);
+      append(label0, strong0);
+      append(label0, t2);
+      append(label0, input0);
+      append(div0, t3);
+      append(div0, label1);
+      append(label1, strong1);
+      append(label1, t5);
+      append(label1, input1);
+      append(header, t6);
+      append(header, div1);
+      append(div1, label2);
+      append(label2, strong2);
+      append(label2, t9);
+      append(label2, input2);
+      append(div1, t10);
+      append(div1, label3);
+      append(label3, strong3);
+      append(label3, t13);
+      append(label3, input3);
+      append(header, t14);
+      append(header, div2);
+      append(div2, label4);
+      append(label4, strong4);
+      append(label4, t17);
+      append(label4, select0);
       append(select0, option0);
       for (let i = 0; i < each_blocks_3.length; i += 1) {
         if (each_blocks_3[i]) {
@@ -38675,16 +38628,11 @@ function create_fragment$m(ctx) {
         /*currentBondName*/
         ctx[5]
       );
-      append(span3, t15);
-      if (if_block0)
-        if_block0.m(span3, null);
-      append(header, t16);
-      append(header, div1);
-      append(div1, span4);
-      append(span4, strong3);
-      append(div1, t19);
-      append(div1, span5);
-      append(span5, select1);
+      append(div2, t19);
+      append(div2, label5);
+      append(label5, strong5);
+      append(label5, t22);
+      append(label5, select1);
       append(select1, option1);
       for (let i = 0; i < each_blocks_2.length; i += 1) {
         if (each_blocks_2[i]) {
@@ -38696,12 +38644,11 @@ function create_fragment$m(ctx) {
         /*currentClass*/
         ctx[0]
       );
-      append(div1, t21);
-      append(div1, span6);
-      append(span6, strong4);
-      append(div1, t24);
-      append(div1, span7);
-      append(span7, select2);
+      append(div2, t24);
+      append(div2, label6);
+      append(label6, strong6);
+      append(label6, t27);
+      append(label6, select2);
       append(select2, option2);
       for (let i = 0; i < each_blocks_1.length; i += 1) {
         if (each_blocks_1[i]) {
@@ -38713,21 +38660,19 @@ function create_fragment$m(ctx) {
         /*currentJobName*/
         ctx[4]
       );
-      append(span7, t26);
-      if (if_block1)
-        if_block1.m(span7, null);
-      append(div1, t27);
-      append(div1, span8);
-      append(div1, t30);
-      append(div1, input4);
-      append(header, t31);
-      append(header, div2);
+      append(div2, t29);
+      append(div2, label7);
+      append(label7, strong7);
+      append(label7, t32);
+      append(label7, input4);
+      append(header, t33);
+      append(header, div3);
       for (let i = 0; i < each_blocks.length; i += 1) {
         if (each_blocks[i]) {
-          each_blocks[i].m(div2, null);
+          each_blocks[i].m(div3, null);
         }
       }
-      append(main, t32);
+      append(main, t34);
       if_blocks[current_block_type_index].m(main, null);
       current = true;
       if (!mounted) {
@@ -38821,21 +38766,6 @@ function create_fragment$m(ctx) {
           ctx2[5]
         );
       }
-      if (
-        /*$actor*/
-        ctx2[1].system.bond
-      ) {
-        if (if_block0) {
-          if_block0.p(ctx2, dirty);
-        } else {
-          if_block0 = create_if_block_7$1(ctx2);
-          if_block0.c();
-          if_block0.m(span3, null);
-        }
-      } else if (if_block0) {
-        if_block0.d(1);
-        if_block0 = null;
-      }
       if (dirty[0] & /*CLASS_NAMES*/
       2048) {
         each_value_2 = ensure_array_like(
@@ -38901,21 +38831,6 @@ function create_fragment$m(ctx) {
       ctx2[0])) {
         select2.disabled = select2_disabled_value;
       }
-      if (
-        /*$actor*/
-        ctx2[1].system.job
-      ) {
-        if (if_block1) {
-          if_block1.p(ctx2, dirty);
-        } else {
-          if_block1 = create_if_block_6$1(ctx2);
-          if_block1.c();
-          if_block1.m(span7, null);
-        }
-      } else if (if_block1) {
-        if_block1.d(1);
-        if_block1 = null;
-      }
       if (dirty[0] & /*tabs, $selected_tab*/
       576) {
         each_value = ensure_array_like(
@@ -38930,7 +38845,7 @@ function create_fragment$m(ctx) {
           } else {
             each_blocks[i] = create_each_block$c(child_ctx);
             each_blocks[i].c();
-            each_blocks[i].m(div2, null);
+            each_blocks[i].m(div3, null);
           }
         }
         for (; i < each_blocks.length; i += 1) {
@@ -38948,27 +38863,27 @@ function create_fragment$m(ctx) {
           if_blocks[previous_block_index] = null;
         });
         check_outros();
-        if_block2 = if_blocks[current_block_type_index];
-        if (!if_block2) {
-          if_block2 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx2);
-          if_block2.c();
+        if_block = if_blocks[current_block_type_index];
+        if (!if_block) {
+          if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx2);
+          if_block.c();
         } else {
-          if_block2.p(ctx2, dirty);
+          if_block.p(ctx2, dirty);
         }
-        transition_in(if_block2, 1);
-        if_block2.m(main, null);
+        transition_in(if_block, 1);
+        if_block.m(main, null);
       }
     },
     i(local) {
       if (current)
         return;
       transition_in(portrait.$$.fragment, local);
-      transition_in(if_block2);
+      transition_in(if_block);
       current = true;
     },
     o(local) {
       transition_out(portrait.$$.fragment, local);
-      transition_out(if_block2);
+      transition_out(if_block);
       current = false;
     },
     d(detaching) {
@@ -38977,12 +38892,8 @@ function create_fragment$m(ctx) {
       }
       destroy_component(portrait);
       destroy_each(each_blocks_3, detaching);
-      if (if_block0)
-        if_block0.d();
       destroy_each(each_blocks_2, detaching);
       destroy_each(each_blocks_1, detaching);
-      if (if_block1)
-        if_block1.d();
       destroy_each(each_blocks, detaching);
       if_blocks[current_block_type_index].d();
       mounted = false;
@@ -39075,9 +38986,7 @@ function instance$l($$self, $$props, $$invalidate) {
       }
     }
   }
-  const click_handler = () => $actor.system.bond?.sheet?.render(true, { focus: true });
-  const click_handler_1 = () => $actor.system.job.sheet.render(true, { focus: true });
-  const click_handler_2 = (tab) => set_store_value(selected_tab, $selected_tab = tab.key, $selected_tab);
+  const click_handler = (tab) => set_store_value(selected_tab, $selected_tab = tab.key, $selected_tab);
   $$self.$$.update = () => {
     if ($$self.$$.dirty[0] & /*$actor*/
     2) {
@@ -39121,9 +39030,7 @@ function instance$l($$self, $$props, $$invalidate) {
     handleDrop,
     allJobs,
     selectedClass,
-    click_handler,
-    click_handler_1,
-    click_handler_2
+    click_handler
   ];
 }
 class PlayerSheet extends SvelteComponent {

@@ -1,8 +1,8 @@
 /**
  * Equips a job and all of its traits. Unequips all other traits / jobs
- * 
- * @param {Actor} actor 
- * @param {Item} job 
+ *
+ * @param {Actor} actor
+ * @param {Item} job
  */
 export async function equipJob(actor, job) {
     // Make all jobs unequipped except the target
@@ -10,8 +10,8 @@ export async function equipJob(actor, job) {
     let jobs = actor.items.filter(i => i.type === "job");
     for (let other_job of jobs) {
         updates.push({
-            _id: other_job._id,
-            "system.equipped": other_job._id === job._id
+            _id: other_job.id,
+            "system.equipped": other_job.id === job.id
         });
     }
 
@@ -24,7 +24,7 @@ export async function equipJob(actor, job) {
         let should_be_equipped = missing_traits.some(mt => mt.name === trait.name);
         missing_traits = missing_traits.filter(mt => mt.name != trait.name);
         updates.push({
-            _id: trait._id,
+            _id: trait.id,
             "system.equipped": should_be_equipped
         });
     }
@@ -42,21 +42,20 @@ export async function equipJob(actor, job) {
 
 /**
  * Equips a bond... and unequips other bonds... and that's it
- * 
- * @param {Actor} actor 
- * @param {Item} job 
+ *
+ * @param {Actor} actor
+ * @param {Item} bond
  */
 export async function equipBond(actor, bond) {
-    // Make all jobs unequipped except the target
+    // Make all bonds unequipped except the target
     let updates = [];
     let bonds = actor.items.filter(i => i.type === "bond");
     for (let other_bond of bonds) {
         updates.push({
-            _id: other_bond._id,
-            "system.equipped": other_bond._id === bond._id
+            _id: other_bond.id,
+            "system.equipped": other_bond.id === bond.id
         });
     }
-
 
     await actor.updateEmbeddedDocuments("Item", updates);
 }

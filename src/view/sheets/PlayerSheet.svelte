@@ -116,73 +116,49 @@
 <main use:dropDocs={{ handle: handleDrop, allow: allowDrop }}>
     <!-- Sheet Header -->
     <header>
-        <Portrait style="grid-area: pic" />
-        <input style="grid-area: name" type="text" use:updateDoc={{ doc, path: "name" }} />
-        <input
-            style="grid-area: player_name"
-            type="text"
-            use:updateDoc={{ doc, path: "system.player_name" }}
-            placeholder="Player Name"
-        />
-        <div style="grid-area: narr" class="header-information">
-            <span><strong>{localize("ICON.Kintype")}:</strong></span>
-            <input type="text" use:updateDoc={{ doc, path: "system.kin" }} />
-            <span><strong>{localize("ICON.Culture")}:</strong> </span>
-            <input type="text" use:updateDoc={{ doc, path: "system.culture" }} />
-            <span>
+        <div class="header-row">
+            <Portrait />
+            <label><strong>Name:</strong> <input type="text" use:updateDoc={{ doc, path: "name" }} /></label>
+            <label><strong>Player:</strong> <input type="text" use:updateDoc={{ doc, path: "system.player_name" }} placeholder="Player Name" /></label>
+        </div>
+        <div class="header-row">
+            <label><strong>{localize("ICON.Kintype")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.kin" }} /></label>
+            <label><strong>{localize("ICON.Culture")}:</strong> <input type="text" use:updateDoc={{ doc, path: "system.culture" }} /></label>
+        </div>
+        <div class="header-row">
+            <label>
                 <strong>{localize("ICON.Bonds.Bond")}:</strong>
-            </span>
-            <span class="dropdown-cell">
                 <select value={currentBondName} on:change={onBondSelected}>
-                    <option value="">-- Select Bond --</option>
+                    <option value="">-- Select --</option>
                     {#each allBonds as bond}
                         <option value={bond.name}>{bond.name}</option>
                     {/each}
                 </select>
-                {#if $actor.system.bond}
-                    <i
-                        class="fas fa-edit"
-                        style="cursor: pointer"
-                        on:click={() => $actor.system.bond?.sheet?.render(true, { focus: true })}
-                    />
-                {/if}
-            </span>
-        </div>
-        <div style="grid-area: comb" class="header-information">
-            <span><strong>{localize("ICON.Class")}:</strong></span>
-            <span class="dropdown-cell">
+            </label>
+            <label>
+                <strong>{localize("ICON.Class")}:</strong>
                 <select value={currentClass} on:change={onClassSelected}>
-                    <option value="">-- Select Class --</option>
+                    <option value="">-- Select --</option>
                     {#each CLASS_NAMES as cls}
                         <option value={cls}>{cls}</option>
                     {/each}
                 </select>
-            </span>
-            <span>
+            </label>
+            <label>
                 <strong>{localize("ICON.Job")}:</strong>
-            </span>
-            <span class="dropdown-cell">
                 <select value={currentJobName} on:change={onJobSelected} disabled={!currentClass}>
-                    <option value="">-- Select Job --</option>
+                    <option value="">-- Select --</option>
                     {#each filteredJobs as job}
                         <option value={job.name}>{job.name}</option>
                     {/each}
                 </select>
-                {#if $actor.system.job}
-                    <i
-                        class="fas fa-edit"
-                        style="cursor: pointer"
-                        on:click={() => $actor.system.job.sheet.render(true, { focus: true })}
-                    />
-                {/if}
-            </span>
-            <span>{localize("ICON.Level")}:</span>
-            <input type="number" use:updateDoc={{ doc, path: "system.level" }} />
+            </label>
+            <label>
+                <strong>{localize("ICON.Level")}:</strong>
+                <input type="number" use:updateDoc={{ doc, path: "system.level" }} />
+            </label>
         </div>
-
-        <div class="tabs" style="grid-area: tabs">
-            <!-- Sheet Tab Navigation -->
-            <!--<Tabs {tabs} horizontal={false} bind:selected={$selected_tab} />-->
+        <div class="tabs">
             {#each tabs as tab}
                 <button class="tab" class:active={tab.key === $selected_tab} on:click={() => ($selected_tab = tab.key)}
                     >{tab.label}</button
@@ -225,38 +201,47 @@
     }
 
     header {
-        flex: 0 1 auto;
-        display: grid;
-        grid-template:
-            "pic    name   player_name tabs" 20px
-            "pic    narr   comb        tabs" auto / 110px 1fr 1fr 1fr;
-        gap: 5px;
-        padding: 10px;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px 10px;
 
-        .header-information {
-            display: grid;
-            grid-template: 1fr 1fr 1fr / 1fr 1fr;
+        .header-row {
+            display: flex;
             align-items: center;
+            gap: 8px;
 
-            .dropdown-cell {
+            label {
                 display: flex;
                 align-items: center;
                 gap: 4px;
+                flex: 1;
+                min-width: 0;
 
-                select {
+                strong {
+                    white-space: nowrap;
+                }
+
+                input, select {
                     flex: 1;
                     min-width: 0;
+                }
+
+                input[type="number"] {
+                    max-width: 50px;
                 }
             }
         }
 
         .tabs {
-            display: grid;
-            height: 100%;
-            grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+            display: flex;
+            gap: 2px;
 
             button {
+                flex: 1;
                 line-height: 1em;
+                padding: 4px 2px;
             }
         }
     }
@@ -264,6 +249,5 @@
     .sheet-body {
         padding: 5px 5px 0px 5px;
         flex: 1 0 auto;
-        max-height: calc(100% - 162px);
     }
 </style>
