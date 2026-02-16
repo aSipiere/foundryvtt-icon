@@ -3,7 +3,7 @@ import { formatDotpath } from "../util/paths";
 // Establish a shorthand
 export const fields = foundry.data.fields;
 
-export class IconDataModel extends foundry.abstract.DataModel {
+export class IconDataModel extends foundry.abstract.TypeDataModel {
   // To enable cool shit
 
   /**

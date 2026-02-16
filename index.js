@@ -62,7 +62,7 @@ function resolveDotpath(obj, path, default_ = void 0, opts = null) {
   return item.val === void 0 ? default_ : item.val;
 }
 const fields$2 = foundry.data.fields;
-class IconDataModel extends foundry.abstract.DataModel {
+class IconDataModel extends foundry.abstract.TypeDataModel {
   // To enable cool shit
   /**
    * Create a full update payload, e.g. to preserve arrays
